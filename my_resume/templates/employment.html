@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}{{page_title}}{% endblock %}
+{% block employment_active %}active{% endblock %}
+{% block page_content %}
+{% load static %}
+
+<article>
+    <header>
+        <h2 class="mb-4">Employment</h2>
+        <p class="lead">API JSON<a href="./api/employment" class="p-3"><i class="fas fa-external-link-alt"></i></a>
+        </p>
+    </header>
+    {% for employment in employments %}
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <p>{{ employment.date_range }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <h3>{{ employment.title }}</h3>
+                </div>
+            </div>
+            {% if employment.url != '' %}
+            <div class="row">
+                <div class="lead mb-2 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <a class="text-primary align-middle" href="{{ employment.url }}" target="_blank"><img
+                            class="img-fluid mt-3" alt="logo" src="{% static 'images/'|add:employment.logo %}" /></a>
+                </div>
+            </div>
+            {% else %}
+            <div class="row">
+                <div class="lead mb-2 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <img class="img-fluid mt-3" alt="logo" src="{% static 'images/'|add:employment.logo %}" />
+                </div>
+            </div>
+            {% endif %}
+            {% if employment.telephone != '' %}
+            <address>
+                <div class="row">
+                    <div
+                        class="col-xl-2 col-lg-3 col-md-4 col-sm-5 font-weight-bold text-lg-right text-md-right text-sm-left text-xl-right">
+                        <p>Telephone:</p>
+                    </div>
+                    <div class="col-xl-10 col-lg-9 col-md-8 col-sm-7">
+                        <p>{{ employment.telephone }}</p>
+                    </div>
+                </div>
+            </address>
+            {% endif %}
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <ul class="list-group">
+                        {% for employment_point in employment.employmentpoint_set.all %}
+                        <li class="list-group-item">{{employment_point.point_content}}</li>
+                        {% endfor %}
+                    </ul>
+                    {% if employment.attachment != '' %}
+                    <br />
+                    <p>
+                        <a class="lead text-secondary" href="{% static '/'|add:employment.attachment %}"
+                            target="_blank">{{ employment.attachment_description }}</a>
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</article>
+<script src="{% static 'scripts/employment.js' %}"></script>
+{% endblock %}

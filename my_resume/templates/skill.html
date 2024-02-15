@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block page_title %}{{page_title}}{% endblock %}
+{% block skill_active %}active{% endblock %}
+{% block page_content %}
+{% load static %}
+
+<article>
+    <header>
+        <h2 class="mb-4">Skill</h2>
+        <p class="lead">API JSON<a href="./api/skill" class="p-3"><i class="fas fa-external-link-alt"></i></a>
+        </p>
+    </header>
+    <div class="row">
+        <p>
+            {% for skill in skills %}
+            <span class="badge rounded-pill bg-primary col-xl-3 col-lg-3 col-md-5 col-sm-5 m-2 p-2">{{ skill.skill_content }}</span>
+            {% endfor %}
+        </p>
+    </div>
+</article>
+<script src="{% static 'scripts/skill.js' %}"></script>
+{% endblock %}

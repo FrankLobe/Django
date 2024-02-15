@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block page_title %}{{page_title}}{% endblock %}
+{% block home_active %}active{% endblock %}
+{% block page_content %}
+{% load static %}
+
+<p class="lead">API JSON<a href="./api/pageparagraph" class="p-3"><i class="fas fa-external-link-alt"></i></a>
+</p>
+<article>
+    {% for page_paragraph in page_paragraphs %}
+    <p>{{ page_paragraph.paragraph_content }}</p>
+    {% endfor %}
+</article>
+<script src="{% static 'scripts/index.js' %}"></script>
+{% endblock %}

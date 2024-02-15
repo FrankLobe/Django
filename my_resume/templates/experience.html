@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block page_title %}{{page_title}}{% endblock %}
+{% block experience_active %}active{% endblock %}
+{% block page_content %}
+{% load static %}
+
+<article>
+    <header>
+        <h2 class="mb-4">Experience</h2>
+        <p class="lead">API JSON<a href="./api/experience" class="p-3"><i class="fas fa-external-link-alt"></i></a>
+        </p>
+    </header>
+    {% for experience in experiences %}
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <h3>{{ experience.experience_description }}
+                        {% if experience.url != '' %}
+                        <a href="{{ experience.url }}"><i class="fas fa-external-link-alt"></i></a></h3>
+                        {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    {% for experience_paragraph in experience.experienceparagraph_set.all %}
+                        <p>{{experience_paragraph.paragraph_content}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</article>
+<script src="{% static 'scripts/experience.js' %}"></script>
+{% endblock %}

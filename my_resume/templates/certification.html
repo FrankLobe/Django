@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block page_title %}{{page_title}}{% endblock %}
+{% block certification_active %}active{% endblock %}
+{% block page_content %}
+{% load static %}
+
+<article>
+    <header>
+        <h2 class="mb-4">Certification</h2>
+        <p class="lead">API JSON<a href="./api/certification" class="p-3"><i class="fas fa-external-link-alt"></i></a>
+        </p>
+    </header>
+
+    {% for certification in certifications %}
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <p>{{certification.year}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                <p class="h4">{{certification.certification_institution}}</p>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <p class="lead">{{certification.certification_description}}
+                        {% if certification.url != '' %}
+                        <a href="{{certification.url}}">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</article>
+<script src="{% static 'scripts/certification.js' %}"></script>
+{% endblock %}
